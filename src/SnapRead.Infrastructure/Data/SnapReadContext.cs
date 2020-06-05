@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SnapRead.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -12,12 +13,12 @@ namespace SnapRead.Infrastructure.Data
         {
         }
 
-        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<UserFile> UserFiles { get; set; }
+        public DbSet<UserFileOcrText> UserFileOcrTexts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
