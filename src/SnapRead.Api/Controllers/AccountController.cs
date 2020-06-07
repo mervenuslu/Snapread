@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SnapRead.Api.Model;
 using SnapRead.Api.Model.Auth;
+using SnapRead.Infrastructure.Data;
 
 namespace SnapRead.Api.Controllers
 {
@@ -43,10 +44,11 @@ namespace SnapRead.Api.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = registerModel.UserName,
-                    Email = registerModel.Email
+                    Email = registerModel.Email,
+                    CreatedAt = DateTime.Now
                 };
 
                 var userCreateResult = await _userManager.CreateAsync(user, registerModel.Password);
@@ -74,12 +76,6 @@ namespace SnapRead.Api.Controllers
             return apiResponseModel;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public int UserCount()
-        {
-            return _userManager.Users.Count();
-        }
 
         [HttpGet]
         [AllowAnonymous]
