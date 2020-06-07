@@ -9,9 +9,11 @@ namespace SnapRead.Core.Entities
         public int ImageId { get; private set; }
         public string OcrText { get; private set; }
         public Image Image { get; private set; }
-       
 
 
+        private ImageOcrText()
+        {
+        }
 
         public ImageOcrText(int imageId,string ocrtext)
         {

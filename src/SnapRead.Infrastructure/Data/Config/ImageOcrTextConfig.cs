@@ -21,7 +21,7 @@ namespace SnapRead.Infrastructure.Data.Config
                 .HasMaxLength(1000);
 
             builder.HasOne(a => a.Image)
-            .WithOne(b => b.ImageOcrText)
+            .WithOne(b => b.OcrText)
             .HasForeignKey<ImageOcrText>(b => b.ImageId);
         }
     }
