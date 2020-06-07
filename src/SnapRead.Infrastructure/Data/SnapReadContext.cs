@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SnapRead.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace SnapRead.Infrastructure.Data
 {
-    public class SnapReadContext : DbContext
+    public class SnapReadContext : IdentityDbContext<ApplicationUser>
     {
         public SnapReadContext(DbContextOptions<SnapReadContext> options) : base(options)
         {

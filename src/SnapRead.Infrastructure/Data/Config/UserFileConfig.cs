@@ -19,12 +19,6 @@ namespace SnapRead.Infrastructure.Data.Config
             builder.Property(ci => ci.FilePath)
                 .IsRequired(true)
                 .HasMaxLength(100);
-
-
-           
-        
-
-
         }
     }
 }

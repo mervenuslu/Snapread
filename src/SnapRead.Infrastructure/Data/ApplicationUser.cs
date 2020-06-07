@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SnapRead.Infrastructure.Identity
+namespace SnapRead.Infrastructure.Data
 {
     public class ApplicationUser : IdentityUser
     {
