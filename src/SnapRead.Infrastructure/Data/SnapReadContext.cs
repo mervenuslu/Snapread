@@ -14,8 +14,8 @@ namespace SnapRead.Infrastructure.Data
         {
         }
 
-        public DbSet<UserFile> UserFiles { get; set; }
-        public DbSet<UserFileOcrText> UserFileOcrTexts { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageOcrText> ImageOcrTexts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

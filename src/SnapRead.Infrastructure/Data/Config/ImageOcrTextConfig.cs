@@ -7,11 +7,11 @@ using System.Text;
 
 namespace SnapRead.Infrastructure.Data.Config
 {
-    public class UserFileOcrTextConfig : IEntityTypeConfiguration<UserFileOcrText>
+    public class ImageOcrTextConfig : IEntityTypeConfiguration<ImageOcrText>
     {
-        public void Configure(EntityTypeBuilder<UserFileOcrText> builder)
+        public void Configure(EntityTypeBuilder<ImageOcrText> builder)
         {
-            builder.ToTable("UserFileOcrText");
+            builder.ToTable("ImageOcrText");
 
             builder.Property(ci => ci.Id)
                 .IsRequired();
@@ -20,9 +20,9 @@ namespace SnapRead.Infrastructure.Data.Config
                 .IsRequired(true)
                 .HasMaxLength(1000);
 
-            builder.HasOne(a => a.UserFile)
-        .WithOne(b => b.UserFileOcrText)
-        .HasForeignKey<UserFileOcrText>(b => b.UserFileId);
+            builder.HasOne(a => a.Image)
+            .WithOne(b => b.ImageOcrText)
+            .HasForeignKey<ImageOcrText>(b => b.ImageId);
         }
     }
 }

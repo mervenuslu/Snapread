@@ -4,14 +4,18 @@ using System.Text;
 
 namespace SnapRead.Core.Entities
 {
-    public class UserFileOcrText:BaseEntity
+    public class ImageOcrText:BaseEntity
     {
-        public int UserFileId { get; private set; }
-        public UserFile UserFile { get; private set; }
+        public int ImageId { get; private set; }
         public string OcrText { get; private set; }
-        public UserFileOcrText(int userFileId,string ocrtext)
+        public Image Image { get; private set; }
+       
+
+
+
+        public ImageOcrText(int imageId,string ocrtext)
         {
-            UserFileId = userFileId;
+            ImageId = imageId;
             OcrText = ocrtext;
         }
         public void UpdateText(string ocrtext)

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace SnapRead.Infrastructure.Data.Config
 {
-    public class UserFileConfig : IEntityTypeConfiguration<UserFile>
+    public class ImageConfig : IEntityTypeConfiguration<Image>
     {
-        public void Configure(EntityTypeBuilder<UserFile> builder)
+        public void Configure(EntityTypeBuilder<Image> builder)
         {
-            builder.ToTable("UserFile");
+            builder.ToTable("Image");
 
             builder.Property(ci => ci.Id)
                 .IsRequired();

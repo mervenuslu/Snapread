@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SnapRead.Api.Model
+namespace SnapRead.Api.Model.Auth
 {
     public class LoginModel
     {
