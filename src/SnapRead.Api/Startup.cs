@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SnapRead.Core.Interfaces;
 using SnapRead.Infrastructure.Data;
 using SnapRead.Infrastructure.Services;
@@ -37,10 +38,10 @@ namespace SnapRead.Api
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddDbContext<SnapReadContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<SnapReadContext>()
-                .AddDefaultTokenProviders();
-           
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                 .AddEntityFrameworkStores<SnapReadContext>()
+                 .AddDefaultTokenProviders();
+
             var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
             services.AddAuthentication(x =>
             {
@@ -74,6 +75,11 @@ namespace SnapRead.Api
                     }
                 };
             });
+          
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
             services.AddTransient<IEmailSender, EmailSender>(i =>
                 new EmailSender(
                     Configuration["EmailSender:Host"],
@@ -91,7 +97,7 @@ namespace SnapRead.Api
                 });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -102,10 +108,13 @@ namespace SnapRead.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

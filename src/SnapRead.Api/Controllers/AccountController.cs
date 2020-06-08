@@ -23,12 +23,12 @@ namespace SnapRead.Api.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class AccountController : BaseApiController
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly IConfiguration _configuration;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IEmailSender emailSender, IConfiguration configuration)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -59,19 +59,19 @@ namespace SnapRead.Api.Controllers
                     var message = new StringBuilder();
                     message.Append($"Please click <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>here</a> to confirm your email.");
                     await _emailSender.SendEmailAsync(user.Email, "Confirm Email", message.ToString());
-                    apiResponseModel.IsSuccess = true;
+                  
                     apiResponseModel.Message = "Confirmation email sent.";
                 }
                 else
                 {
-                    apiResponseModel.IsSuccess = false;
-                    apiResponseModel.Message = userCreateResult.Errors.ToString();
+
+                    apiResponseModel.Errors.AddRange(userCreateResult.Errors.Select(x=>x.Description).ToList());
                 }
             }
             else
             {
-                apiResponseModel.IsSuccess = false;
-                apiResponseModel.Message = "Model state is not valid.";
+
+                apiResponseModel.Errors.Add("Model state is not valid.");
             }
             return apiResponseModel;
         }
