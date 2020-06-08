@@ -100,7 +100,7 @@ namespace SnapRead.Api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ApiResponseModel<object>> SendConfirmationEmail(string email)
+        public async Task<BaseResponseModel> SendConfirmationEmail(string email)
         {
             ApiResponseModel<object> apiResponseModel = new ApiResponseModel<object>();
 
@@ -160,7 +160,7 @@ namespace SnapRead.Api.Controllers
             }
             return apiResponseModel;
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<BaseResponseModel> SendResetPasswordLink(string email)
         {

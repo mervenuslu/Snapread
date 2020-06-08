@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SnapRead.Api.Services;
 using SnapRead.Core.Interfaces;
 using SnapRead.Infrastructure.Data;
 using SnapRead.Infrastructure.Services;
@@ -80,6 +81,7 @@ namespace SnapRead.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+            services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IEmailSender, EmailSender>(i =>
                 new EmailSender(
                     Configuration["EmailSender:Host"],
