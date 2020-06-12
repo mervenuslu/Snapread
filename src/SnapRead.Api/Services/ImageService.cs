@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SnapRead.Api.Model;
+using SnapRead.Core.Entities;
+using SnapRead.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace SnapRead.Api.Services
             using (var memoryStream = new MemoryStream())
             {
                 await file.CopyToAsync(memoryStream);
-                using (var img = Image.FromStream(memoryStream))
+                using (var img = System.Drawing.Image.FromStream(memoryStream))
                 {
                     string tesspath = Path.Combine(_env.WebRootPath, "tessdata");
                     using (var engine = new TesseractEngine(tesspath, "tur", EngineMode.Default))
